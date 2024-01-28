@@ -4,6 +4,10 @@ class X:
 
     def __repr__(self):
         return "X"
+    
+    def evaluate(self, xval): 
+        return xval
+    
 
 class Int:
     def __init__(self, i):
@@ -12,6 +16,9 @@ class Int:
     def __repr__(self):
         return str(self.i)
 
+    def evaluate(self, xval): 
+        return self.i; 
+
 class Add:
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -19,6 +26,9 @@ class Add:
 
     def __repr__(self):
         return repr(self.p1) + " + " + repr(self.p2)
+    
+    def evaluate(self, xval): 
+        return self.p1.evaluate(xval) + self.p2.evaluate(xval)
 
 class Mul:
     def __init__(self, p1, p2):
@@ -35,6 +45,9 @@ class Mul:
         else: 
             repr2 = repr(self.p2)
         return repr1 + " * " + repr2
+    
+    def evaluate(self, xval): 
+        return self.p1.evaluate(xval) * self.p2.evaluate(xval)
 
 class Div: 
     def __init__(self, p1, p2): 
@@ -51,6 +64,9 @@ class Div:
         else: 
             repr2 = repr(self.p2)
         return repr1 + " / " + repr2
+
+    def evaluate(self, xval): 
+        return self.p1.evaluate(xval) / self.p2.evaluate(xval)
     
     
     
@@ -62,10 +78,15 @@ class Sub:
     def __repr__(self): 
         return repr(self.p1) + " - " + repr(self.p2)
     
+    def evaluate(self, xval): 
+        return self.p1.evaluate(xval) - self.p2.evaluate(xval)
+    
+    
+    
 
 
-
-poly = Add( Add( Int(4), Int(3)), Add( X(), Mul( Int(1), Add( Mul(X(), X()), Int(1)))))
-poly2 = Mul(Div(Add(Int(2), Int(5)), Int(10)), Sub(Add(Int(3), X()), Int(23)))
-print(poly)
+#poly = Sub(Int(10), X())
+poly2 = Sub(Div(Add(Int(2), Int(5)), Int(10)), Sub(Add(Int(3), X()), Int(23)))
 print(poly2)
+print(poly2.evaluate(30))
+# print(poly2)
